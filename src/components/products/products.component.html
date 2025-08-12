@@ -1,0 +1,32 @@
+<section>
+  <input
+    type="search"
+    class="form-control w-50 m-auto mt-4 border border-success"
+    placeholder="Search products..."
+    [(ngModel)]="text"
+  />
+  <div class="row my-3 g-4">
+    @for (product of displayedProducts() | search:text; track product._id) {
+    <div class="col-md-3">
+      <div class="p-2 product">
+        <div [routerLink]="[`/details/${product._id}`]">
+          <img class="w-100" height="280px" [src]="product.imageCover" alt="" />
+          <h4 class="text-main py-1">{{ product.category.name }}</h4>
+          <h5>{{ product.title.split(" ", 2).join(" ") }}</h5>
+
+          <div class="d-flex justify-content-between py-1">
+            <span>{{ product.price | currency : "EGP" }}</span>
+            <div>
+              <span> <i class="fa-solid fa-star rating-color"></i></span>
+              <span>{{ product.ratingsAverage }}</span>
+            </div>
+          </div>
+        </div>
+        <button (click)="addCart(product._id)" class="btn btn-main w-100 my-1">
+          Add To Cart
+        </button>
+      </div>
+    </div>
+    }
+  </div>
+</section>

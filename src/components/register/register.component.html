@@ -1,0 +1,123 @@
+<section class="row p-3">
+  <div class="col-md-9 p-3 rounded-3 shadow m-auto">
+    <h3 class="text-main my-3">RegisterForm</h3>
+    <form [formGroup]="registerForm" (ngSubmit)="registerSubmit()">
+      <div class="my-2">
+        <label for="nameInput ">Name:</label>
+        <input
+          formControlName="name"
+          type="text"
+          class="form-control"
+          id="nameInput"
+          [class]="{
+            'is-valid': registerForm.get('name')?.valid,
+            'is-invalid': checkError(registerForm.get('name'))
+          }"
+        />
+        @if(checkError(registerForm.get('name'))){
+        @if(registerForm.get('name')?.getError('required')){
+        <p class="text-danger py-1">name is required</p>
+        } @else if (registerForm.get('name')?.getError('minlength')) {
+        <p class="text-danger py-1">Name Min Length 3</p>
+        } @else if (registerForm.get('name')?.getError('maxlength')) {
+        <p class="text-danger py-1">Name Max Length 25</p>
+        } }
+      </div>
+
+      <div class="my-2">
+        <label for="emailInput ">Email :</label>
+        <input
+          type="email"
+          formControlName="email"
+          class="form-control"
+          id="emailInput"
+          [class]="{
+            'is-valid': registerForm.get('email')?.valid,
+            'is-invalid': checkError(registerForm.get('email'))
+          }"
+        />
+
+        @if(checkError(registerForm.get('email'))){
+        @if(registerForm.get('email')?.getError('required')){
+        <p class="text-danger py-1">email is required</p>
+        } @else if (registerForm.get('email')?.getError('email')) {
+        <p class="text-danger py-1">Enter Valid Email</p>
+        } }
+      </div>
+      <div class="my-2">
+        <label for="passwordInput ">Password</label>
+        <input
+          type="password"
+          formControlName="password"
+          class="form-control"
+          id="passwordInput"
+          [class]="{
+            'is-valid': registerForm.get('password')?.valid,
+            'is-invalid': checkError(registerForm.get('password'))
+          }"
+        />
+        @if(checkError(registerForm.get('password'))){
+        @if(registerForm.get('password')?.getError('required')){
+        <p class="text-danger py-1">password is required</p>
+        } @else if (registerForm.get('password')?.getError('pattern')) {
+        <p class="text-danger py-1">must be at least 6 chars</p>
+        } }
+      </div>
+      <div class="my-2">
+        <label for="rePasswordInput">rePassword</label>
+        <input
+          type="password"
+          formControlName="rePassword"
+          class="form-control"
+          id="rePasswordInput"
+          [class]="{
+            'is-valid':
+              !registerForm.getError('misMatch') &&
+              (registerForm.get('rePassword')?.touched ||
+                registerForm.get('rePassword')?.dirty),
+            'is-invalid':
+              registerForm.getError('misMatch') &&
+              (registerForm.get('rePassword')?.touched ||
+                registerForm.get('rePassword')?.dirty)
+          }"
+        />@if(registerForm.getError('misMatch')&&
+        (registerForm.get('rePassword')?.touched||
+        registerForm.get('rePassword')?.dirty)) {
+        <p class="text-danger py-1">Password confirmation is incorrect</p>
+        }
+      </div>
+      <div class="my-2">
+        <label for="phoneInput">Phone</label>
+        <input
+          type="text"
+          formControlName="phone"
+          class="form-control"
+          id="phoneInput"
+          [class]="{
+            'is-valid': registerForm.get('phone')?.valid,
+            'is-invalid': checkError(registerForm.get('phone'))
+          }"
+        />
+        @if(checkError(registerForm.get('phone'))){
+        @if(registerForm.get('phone')?.getError('required')){
+        <p class="text-danger py-1">phone is required</p>
+        } @else if (registerForm.get('phone')?.getError('pattern')) {
+        <p class="text-danger py-1">accept only egypt phone numbers</p>
+        } }
+      </div>
+      <button type="submit" class="btn btn-main d-block ms-auto mt-2">
+        @if(this.loadingService.isLoading()){
+        <span
+          class="spinner-border spinner-border-sm"
+          role="status"
+          aria-hidden="true"
+        ></span
+        >} @else {Register}
+      </button>
+    </form>
+    <p>
+      Already have an account?
+      <a class="text-primary" routerLink="/login">Go to Login</a>
+    </p>
+  </div>
+</section>

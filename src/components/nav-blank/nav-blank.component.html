@@ -1,0 +1,74 @@
+<nav
+  class="navbar navbar-expand-lg navbar-light bg-light position-fixed w-100 top-0 z-3"
+>
+  <div class="container-fluid">
+    <a class="navbar-brand" routerLink="home">
+      <img src="./images/freshcart-logo.svg" alt="" />
+    </a>
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarNav"
+      aria-controls="navbarNav"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item mx-1">
+          <a class="nav-link" routerLinkActive="active-link" routerLink="home"
+            >Home</a
+          >
+        </li>
+        <li class="nav-item mx-1">
+          <a
+            class="nav-link"
+            routerLinkActive="active-link"
+            routerLink="products"
+            >Products</a
+          >
+        </li>
+        <li class="nav-item mx-1">
+          <a
+            class="nav-link"
+            routerLinkActive="active-link"
+            routerLink="categories"
+            >Categories</a
+          >
+        </li>
+      </ul>
+      <ul class="navbar-nav ms-auto mx-2">
+        <li class="nav-item mx-1">
+          <a class="nav-link position-relative" routerLink="cart"
+            ><i class="fa-solid fa-cart-plus text-success fs-3 ps-2"></i
+            ><span
+              class="badge w-50 h-50 rounded-circle position-absolute bg-success top-0 start-0 p-0 py-1"
+            >
+              @if(loadingService.isLoading()){
+              <span
+                class="spinner-border spinner-border-sm"
+                role="status"
+                aria-hidden="true"
+              ></span>
+              } @else{
+              <span class="fs-6 text-center">{{ countNumber() }}</span> }
+            </span></a
+          >
+        </li>
+        <li class="nav-item mx-1">
+          <a class="nav-link" routerLink="wishlist"
+            ><i class="fa-solid fa-heart text-danger fs-4"></i
+          ></a>
+        </li>
+        <li class="nav-item mx-1">
+          <a class="nav-link cursor-pointer" (click)="authService.logOut()"
+            >signOut</a
+          >
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>

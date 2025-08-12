@@ -1,0 +1,60 @@
+<section class="row p-3">
+  <div class="col-md-9 p-3 rounded-3 shadow m-auto">
+    <h3 class="text-main my-3">LoginForm</h3>
+    <form [formGroup]="loginForm" (ngSubmit)="loginSubmit()">
+      <div class="my-2">
+        <label for="emailInput ">Email :</label>
+        <input
+          type="email"
+          formControlName="email"
+          class="form-control"
+          id="emailInput"
+          [ngClass]="{
+            'is-valid': loginForm.get('email')?.valid,
+            'is-invalid': checkError(loginForm.get('email'))
+          }"
+        />
+
+        @if(checkError(loginForm.get('email'))){
+        @if(loginForm.get('email')?.getError('required')){
+        <p class="text-danger py-1">email is required</p>
+        } @else if (loginForm.get('email')?.getError('email')) {
+        <p class="text-danger py-1">Enter Valid Email</p>
+        } }
+      </div>
+      <div class="my-2">
+        <label for="passwordInput ">Password</label>
+        <input
+          type="password"
+          formControlName="password"
+          class="form-control"
+          id="passwordInput"
+          [class]="{
+            'is-valid': loginForm.get('password')?.valid,
+            'is-invalid': checkError(loginForm.get('password'))
+          }"
+        />
+        @if(checkError(loginForm.get('password'))){
+        @if(loginForm.get('password')?.getError('required')){
+        <p class="text-danger py-1">password is required</p>
+        } @else if (loginForm.get('password')?.getError('pattern')) {
+        <p class="text-danger py-1">must be at least 6 chars</p>
+        } }
+      </div>
+
+      <button type="submit" class="btn btn-main d-block ms-auto mt-2">
+        @if(this.loadingService.isLoading()){
+        <span
+          class="spinner-border spinner-border-sm"
+          role="status"
+          aria-hidden="true"
+        ></span
+        >} @else {login}
+      </button>
+    </form>
+    <p>
+      Don’t have an account?
+      <a class="text-primary" routerLink="/register">Register here</a>
+    </p>
+  </div>
+</section>
