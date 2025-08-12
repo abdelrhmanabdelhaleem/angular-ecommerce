@@ -21,6 +21,7 @@ export class CategoriesComponent {
   categoriesList: WritableSignal<ICategory[]> = signal([]);
   destroyRef = inject(DestroyRef);
   //commit
+  //commit
 
   ngOnInit(): void {
     this.categoriesService
