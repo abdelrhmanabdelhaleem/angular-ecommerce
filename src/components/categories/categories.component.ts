@@ -22,7 +22,6 @@ export class CategoriesComponent {
   destroyRef = inject(DestroyRef);
   //commit
   //commit
-  //commit
 
   ngOnInit(): void {
     this.categoriesService
